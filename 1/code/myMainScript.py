@@ -2,6 +2,7 @@ import os
 import math
 import cv2 as cv
 import numpy as np 
+import matplotlib.pyplot as plt 
 
 
 def myShrinkImageByFactorD(path, scale):
@@ -17,13 +18,13 @@ def myShrinkImageByFactorD(path, scale):
 		for j in range(m):
 			out[i][j] = img[i * scale][j * scale]
 
-	cv.imshow('input', img)
-	cv.imshow(f'shrunk by {scale}', out)
+	plt.figure()
+	plt.imshow(img)
 
-	print('Press Esc to exit')
+	plt.figure()
+	plt.imshow(out)
 
-	if cv.waitKey(0) == 27:
-		cv.destroyAllWindows()
+	plt.show()
 
 
 def myBilinearInterpolation(path, hor, ver):
@@ -52,13 +53,14 @@ def myBilinearInterpolation(path, hor, ver):
 
 			out[i][j] /= 255
 
-	cv.imshow('input', img)
-	cv.imshow(f'bilinear interpolation', out)
 
-	print('Press Esc to exit')
+	plt.figure()
+	plt.imshow(img)
 
-	if cv.waitKey(0) == 27:
-		cv.destroyAllWindows()
+	plt.figure()
+	plt.imshow(out)
+
+	plt.show()
 
 
 def myNearestNeighborInterpolation(path, hor, ver):
@@ -77,13 +79,13 @@ def myNearestNeighborInterpolation(path, hor, ver):
 			col = int(j/ver) if s >= 0.5 else int(j/ver)+1
 			out[i][j] = img[row][col]
 
-	cv.imshow('input', img)
-	cv.imshow('nearest neighbor interpolation', out)
+	plt.figure()
+	plt.imshow(img)
 
-	print('Press Esc to exit')
+	plt.figure()
+	plt.imshow(out)
 
-	if cv.waitKey(0) == 27:
-		cv.destroyAllWindows()
+	plt.show()
 
 
 ############################################################
@@ -133,14 +135,13 @@ def myImageRotation(path, deg):
 				if i != m-1 and j != n-1:
 					out[ni][nj] += (1-r)*(1-s)*img[i+1][j+1]
 
-	out /= 255
-	cv.imshow(f'rotated by {deg} degrees', img)
-	cv.imshow('output', out)
+	plt.figure()
+	plt.imshow(img)
 
-	print('Press Esc to exit')
+	plt.figure()
+	plt.imshow(out / 255)
 
-	if cv.waitKey(0) == 27:
-		cv.destroyAllWindows()	
+	plt.show()	
 
 
 if __name__ == '__main__':
