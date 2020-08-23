@@ -5,9 +5,6 @@ import cv2 as cv
 import matplotlib.pyplot as plt 
 
 
-def nothing(x):
-	pass
-
 def myForegroundMask(path):
 	img = cv.imread(path)
 	assert isinstance(img, np.ndarray)
