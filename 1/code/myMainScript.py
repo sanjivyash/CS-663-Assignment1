@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 
 def myShrinkImageByFactorD(path, scale):
 	img = cv.imread(path)
+	img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 	assert isinstance(img, np.ndarray)
 
 	n = img.shape[0]
@@ -29,6 +30,7 @@ def myShrinkImageByFactorD(path, scale):
 
 def myBilinearInterpolation(path, hor, ver):
 	img = cv.imread(path)
+	img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 	assert isinstance(img, np.ndarray)
 
 	m, n = img.shape[:2]
@@ -65,6 +67,7 @@ def myBilinearInterpolation(path, hor, ver):
 
 def myNearestNeighborInterpolation(path, hor, ver):
 	img = cv.imread(path)
+	img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 	assert isinstance(img, np.ndarray)
 
 	m, n = img.shape[:2]
@@ -92,6 +95,7 @@ def myNearestNeighborInterpolation(path, hor, ver):
 # INCOMPLETE
 def myBicubicInterpolation(path, ver, hor):
 	img = cv.imread(path)
+	img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 	assert isinstance(img, np.ndarray)
 
 	m, n = img.shape[:2]
@@ -107,6 +111,7 @@ def myBicubicInterpolation(path, ver, hor):
 
 def myImageRotation(path, deg):
 	img = cv.imread(path)
+	img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 	assert isinstance(img, np.ndarray)
 
 	m, n = img.shape[:2]
