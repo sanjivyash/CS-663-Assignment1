@@ -21,11 +21,24 @@ def myForegroundMask(path):
 	else:
 		raise TypeError('Provide image or path')
 
-	mask = np.array(img > 60, dtype=np.uint8)
+	smooth = np.zeros(img.shape, dtype=np.float64)
+
+	for i in range(img.shape[0]):
+		for j in range(img.shape[1]):
+			try:
+				for x in [-1,0,1]:
+					for y in [-1,0,1]:
+						smooth[i][j] += img[i+x][j+y]
+				smooth[i][j] /= 9
+			except:
+				smooth[i][j] = img[i][j]
+
+	smooth /= 255
+	mask = np.array(smooth > 4/255, dtype=np.uint8)
 
 	plt.figure()
 	plt.imshow(img)
-	
+
 	plt.figure()
 	plt.imshow(img * mask)
 
@@ -77,15 +90,15 @@ if __name__ == '__main__':
 	
 	path = os.path.join(IMG_DIR, 'statue.png')
 	out = myForegroundMask(path)
-	myLinearContrastStretching(out)
+	# myLinearContrastStretching(out)
 	
-	path = os.path.join(IMG_DIR, 'retina.png')
-	myLinearContrastStretching(path)
+	# path = os.path.join(IMG_DIR, 'retina.png')
+	# myLinearContrastStretching(path)
 
-	for file in os.listdir(IMG_DIR):
-		if 'statue' in file or 'retina' in file:
-			continue 
+	# for file in os.listdir(IMG_DIR):
+	# 	if 'statue' in file or 'retina' in file:
+	# 		continue 
 
-		print(file)
-		path = os.path.join(IMG_DIR, file)
-		myLinearContrastStretching(path)
+	# 	print(file)
+	# 	path = os.path.join(IMG_DIR, file)
+	# 	myLinearContrastStretching(path)
