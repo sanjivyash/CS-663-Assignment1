@@ -103,10 +103,6 @@ def myLinearContrastStretching(path):
 
 	ax = plt.subplot(1,2,2)
 	
-<<<<<<< HEAD
-	plt.figure()
-	plt.imshow(out)
-=======
 	im = ax.imshow(out)
 	ax.set_title(image_titles[1])
 	divider = make_axes_locatable(ax)
@@ -119,8 +115,7 @@ def myLinearContrastStretching(path):
 	elif(isinstance(path, np.ndarray)):
 		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
 		plt.savefig(os.path.join(SaVE_DIR, ('LinearContrasT'+'statue.png')))
->>>>>>> 635e5f87968a8a2235fc581b56225e266969d127
-
+		
 	plt.show()
 
 	return out
