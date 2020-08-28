@@ -243,7 +243,7 @@ def myHM():
 	if(isinstance(path, str)):
 		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
 		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+os.path.split(path)[1])))
-	elif(isinstance(path, np.ndarray)):
+	else:
 		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
 		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+'statue.png')))
 
