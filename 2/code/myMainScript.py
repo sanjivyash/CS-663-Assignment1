@@ -101,6 +101,8 @@ def myLinearContrastStretching(path):
 
 	plt.show()
 
+	return out
+
 
 def myHE(path):
 	if isinstance(path, str):
@@ -139,6 +141,8 @@ def myHE(path):
 
 	plt.show()
 
+	return out
+
 
 def myHM():
 	img = extractImage("../data/retina.png")
@@ -176,6 +180,8 @@ def myHM():
 	plt.imshow(out)
 
 	plt.show()
+
+	return out
 
 
 if __name__ == '__main__':
