@@ -97,7 +97,7 @@ def myLinearContrastStretching(path):
 	plt.imshow(img)
 	
 	plt.figure()
-	plt.imshow(out) 
+	plt.imshow(out)
 
 	plt.show()
 
