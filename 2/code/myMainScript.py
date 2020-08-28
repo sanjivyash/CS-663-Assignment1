@@ -257,8 +257,14 @@ if __name__ == '__main__':
 	path = os.path.join(IMG_DIR, 'statue.png')
 	out = myForegroundMask(path)
 
-	contrastPaths=[os.path.join(IMG_DIR, 'barbara.png'), os.path.join(IMG_DIR, 'TEM.png'),
-		os.path.join(IMG_DIR, 'canyon.png'), os.path.join(IMG_DIR, 'church.png'), os.path.join(IMG_DIR, 'chestXray.png'), out]
+	contrastPaths=[
+		os.path.join(IMG_DIR, 'barbara.png'), 
+		os.path.join(IMG_DIR, 'TEM.png'),
+		os.path.join(IMG_DIR, 'canyon.png'), 
+		os.path.join(IMG_DIR, 'church.png'), 
+		os.path.join(IMG_DIR, 'chestXray.png'), 
+		out
+	]
 	
 	for path in contrastPaths:
     		myLinearContrastStretching(path)
@@ -267,4 +273,3 @@ if __name__ == '__main__':
     		myHE(path)
 	
 	myHM()
-	
