@@ -3,6 +3,7 @@ import math
 import numpy as np 
 import cv2 as cv
 import matplotlib.pyplot as plt 
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 def extractImage(path):
@@ -52,19 +53,21 @@ def myForegroundMask(path):
 
 	smooth /= 255
 	mask = np.array(smooth > 4/255, dtype=np.uint8)
-
-	plt.figure()
-	plt.imshow(img)
-
-	plt.figure()
-	plt.imshow(img * mask)
-
-	plt.figure()
-	plt.imshow(mask * 255) 
-
+	image_titles = ["Original Image", "Binary Mask", "Masked Image"]
+	images = [img, (mask*255), (img*mask)]
+	axes = []
+	for i in range(3):
+		axes.append(plt.subplot(1,3,(i+1)))
+		im = axes[i].imshow(images[i], cmap='gray')
+		axes[i].set_title(image_titles[i])
+		divider = make_axes_locatable(axes[i])
+		cax = divider.append_axes('right', size='5%', pad=0.05)
+		plt.colorbar(im, cax=cax)
+	SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
+	plt.savefig(os.path.join(SaVE_DIR, 'myForegroundMask.png'))
 	plt.show()
 
-	return img * mask
+	return (img * mask)
 
 
 def linearStretch(x):
@@ -93,11 +96,30 @@ def myLinearContrastStretching(path):
 			for k in range(3):
 				out[i][j][k] = linearStretch(img[i][j][k]/255)
 
-	plt.figure()
-	plt.imshow(img)
+	image_titles=["Original Image", "Contrast Stretched Image"]
+	ax = plt.subplot(1,2,1)
+	im = ax.imshow(img)
+	ax.set_title(image_titles[0])
+
+	ax = plt.subplot(1,2,2)
 	
+<<<<<<< HEAD
 	plt.figure()
 	plt.imshow(out)
+=======
+	im = ax.imshow(out)
+	ax.set_title(image_titles[1])
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	plt.colorbar(im, cax= cax)
+
+	if(isinstance(path, str)):
+		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
+		plt.savefig(os.path.join(SaVE_DIR, ('LinearContrasT'+os.path.split(path)[1])))
+	elif(isinstance(path, np.ndarray)):
+		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
+		plt.savefig(os.path.join(SaVE_DIR, ('LinearContrasT'+'statue.png')))
+>>>>>>> 635e5f87968a8a2235fc581b56225e266969d127
 
 	plt.show()
 
@@ -133,19 +155,33 @@ def myHE(path):
 			r, g, b = img[i][j]
 			out[i][j] = np.array([fR[r], fG[g], fB[b]])
 
-	plt.figure()
-	plt.imshow(img)
+	image_titles=["Original Image", "Contrasted Image"]
+	ax = plt.subplot(1,2,1)
+	im = ax.imshow(img)
+	ax.set_title(image_titles[0])
 
-	plt.figure()
-	plt.imshow(out)
+	ax = plt.subplot(1,2,2)
+	
+	im = ax.imshow(out)
+	ax.set_title(image_titles[1])
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	plt.colorbar(im, cax= cax)
 
+	if(isinstance(path, str)):
+		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
+		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+os.path.split(path)[1])))
+	elif(isinstance(path, np.ndarray)):
+		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
+		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+'statue.png')))
 	plt.show()
 
 	return out
 
 
 def myHM():
-	img = extractImage("../data/retina.png")
+	img_path = "../data/retina.png"
+	img = extractImage(img_path)
 	ideal = extractImage("../data/retinaRef.png")
 
 	px_img = np.zeros((3,256), dtype=np.int32)
@@ -169,15 +205,42 @@ def myHM():
 		for j in range(n):
 			for k in range(3):
 				out[i][j][k] = inv_ideal[k][int(cdf_img[k][img[i][j][k]])]
+	heImage = myHE(img_path)
 
-	plt.figure()
-	plt.imshow(img)
+	image_titles=["Original Image", "Histogram Matched Image", "Histogram Equalized Image "]
+	ax = plt.subplot(1,3,1)
+	im = ax.imshow(img)
+	ax.set_title(image_titles[0])
 
-	plt.figure()
-	plt.imshow(ideal)
+	ax = plt.subplot(1,3,2)
+	im = ax.imshow(out)
+	ax.set_title(image_titles[1])
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	plt.colorbar(im, cax= cax)
 
-	plt.figure()
-	plt.imshow(out)
+	ax = plt.subplot(1,3,3)
+	im = ax.imshow(heImage)
+	ax.set_title(image_titles[2])
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	plt.colorbar(im, cax= cax)
+
+	if(isinstance(path, str)):
+		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
+		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+os.path.split(path)[1])))
+	elif(isinstance(path, np.ndarray)):
+		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
+		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+'statue.png')))
+
+	# plt.figure()
+	# plt.imshow(img)
+
+	# plt.figure()
+	# plt.imshow(ideal)
+
+	# plt.figure()
+	# plt.imshow(out)
 
 	plt.show()
 
@@ -189,21 +252,26 @@ if __name__ == '__main__':
 	
 	path = os.path.join(IMG_DIR, 'statue.png')
 	out = myForegroundMask(path)
+
+	contrastPaths=[os.path.join(IMG_DIR, 'barbara.png'), os.path.join(IMG_DIR, 'TEM.png'),
+		os.path.join(IMG_DIR, 'canyon.png'), os.path.join(IMG_DIR, 'church.png'), os.path.join(IMG_DIR, 'chestXray.png'), out]
 	
-	myLinearContrastStretching(out)
-	myHE(out)
+	# for i in range(len(contrastPaths)):
+    # 		myLinearContrastStretching(contrastPaths[i])
+	# for i in range(len(contrastPaths)):
+    # 		myHE(contrastPaths[i])
 	
-	myHM()
+# 	myHM()
 
-	path = os.path.join(IMG_DIR, 'retina.png')
-	myLinearContrastStretching(path)
-	myHE(path)
+# 	path = os.path.join(IMG_DIR, 'retina.png')
+# 	myLinearContrastStretching(path)
+# 	myHE(path)
 
-	for file in os.listdir(IMG_DIR):
-		if 'statue' in file or 'retina' in file:
-			continue 
+# 	for file in os.listdir(IMG_DIR):
+# 		if 'statue' in file or 'retina' in file:
+# 			continue 
 
-		print(file)
-		path = os.path.join(IMG_DIR, file)
-		myLinearContrastStretching(path)
-		myHE(path)
+# 		print(file)
+# 		path = os.path.join(IMG_DIR, file)
+# 		myLinearContrastStretching(path)
+# 		myHE(path)
