@@ -3,6 +3,7 @@ import math
 import cv2 as cv
 import numpy as np 
 import matplotlib.pyplot as plt 
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 def myShrinkImageByFactorD(path, scale):
@@ -19,13 +20,24 @@ def myShrinkImageByFactorD(path, scale):
 		for j in range(m):
 			out[i][j] = img[i * scale][j * scale]
 
-	plt.figure()
-	plt.imshow(img)
+	titles=["Original Image", "Shrunk Image"]
+	
+	ax = plt.subplot(1,2,1)
+	im = ax.imshow(img)
+	ax.set_title(titles[0])
 
-	plt.figure()
-	plt.imshow(out)
-
+	ax = plt.subplot(1,2,2)
+	
+	im = ax.imshow(out)
+	ax.set_title(titles[1])
+	
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	
+	plt.colorbar(im, cax= cax)
 	plt.show()
+
+	return out
 
 
 def myBilinearInterpolation(path, hor, ver):
@@ -55,13 +67,24 @@ def myBilinearInterpolation(path, hor, ver):
 
 			out[i][j] /= 255
 
-	plt.figure()
-	plt.imshow(img)
+	titles=["Original Image", "Bilinear Image"]
+	
+	ax = plt.subplot(1,2,1)
+	im = ax.imshow(img)
+	ax.set_title(titles[0])
 
-	plt.figure()
-	plt.imshow(out)
-
+	ax = plt.subplot(1,2,2)
+	
+	im = ax.imshow(out)
+	ax.set_title(titles[1])
+	
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	
+	plt.colorbar(im, cax= cax)
 	plt.show()
+
+	return out
 
 
 def myNearestNeighborInterpolation(path, hor, ver):
@@ -81,13 +104,24 @@ def myNearestNeighborInterpolation(path, hor, ver):
 			col = int(j/ver) if s >= 0.5 else int(j/ver)+1
 			out[i][j] = img[row][col]
 
-	plt.figure()
-	plt.imshow(img)
+	image_titles=["Original Image", "Neighbor Image"]
+	
+	ax = plt.subplot(1,2,1)
+	im = ax.imshow(img)
+	ax.set_title(image_titles[0])
 
-	plt.figure()
-	plt.imshow(out)
-
+	ax = plt.subplot(1,2,2)
+	
+	im = ax.imshow(out)
+	ax.set_title(image_titles[1])
+	
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	
+	plt.colorbar(im, cax= cax)
 	plt.show()
+
+	return out
 
 
 ############################################################
@@ -139,19 +173,34 @@ def myImageRotation(path, deg):
 				if i != m-1 and j != n-1:
 					out[ni][nj] += (1-r)*(1-s)*img[i+1][j+1]
 
-	plt.figure()
-	plt.imshow(img)
+	out /= 255
+	titles=["Original Image", "Rotated Image"]
+	
+	ax = plt.subplot(1,2,1)
+	im = ax.imshow(img)
+	ax.set_title(titles[0])
 
-	plt.figure()
-	plt.imshow(out / 255)
+	ax = plt.subplot(1,2,2)
+	
+	im = ax.imshow(out)
+	ax.set_title(titles[1])
+	
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+	
+	plt.colorbar(im, cax= cax)
+	plt.show()
 
-	plt.show()	
+	return out
 
 
 if __name__ == '__main__':
 	IMG_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 
 	myShrinkImageByFactorD(os.path.join(IMG_DIR, 'circles_concentric.png'), 2)
-	# myBilinearInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
-	# myNearestNeighborInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
-	# myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 30)
+	myBilinearInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
+	myNearestNeighborInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
+	
+	myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 30)
+	myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 45)
+	myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 60)

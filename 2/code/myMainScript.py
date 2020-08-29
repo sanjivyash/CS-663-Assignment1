@@ -79,11 +79,8 @@ def myForegroundMask(path):
 		cax = divider.append_axes('right', size='5%', pad=0.05)
 		
 		plt.colorbar(im, cax=cax)
-	
-	SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
-	plt.savefig(os.path.join(SaVE_DIR, 'myForegroundMask.png'))
-	plt.show()
 
+	plt.show()
 	return (img * mask)
 
 
@@ -118,15 +115,8 @@ def myLinearContrastStretching(path):
 	cax = divider.append_axes('right', size='5%', pad=0.05)
 	
 	plt.colorbar(im, cax= cax)
-
-	if(isinstance(path, str)):
-		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
-		plt.savefig(os.path.join(SaVE_DIR, ('LinearContrasT'+os.path.split(path)[1])))
-	else:
-		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
-		plt.savefig(os.path.join(SaVE_DIR, ('LinearContrasT'+'statue.png')))
-
 	plt.show()
+
 	return out
 
 
@@ -174,21 +164,13 @@ def myHE(path):
 	cax = divider.append_axes('right', size='5%', pad=0.05)
 	
 	plt.colorbar(im, cax= cax)
-
-	if(isinstance(path, str)):
-		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
-		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+os.path.split(path)[1])))
-	else:
-		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
-		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+'statue.png')))
-	
 	plt.show()
+
 	return out
 
 
 def myHM():
-	img_path = "../data/retina.png"
-	img = extractImage(img_path)
+	img = extractImage("../data/retina.png")
 	ideal = extractImage("../data/retinaRef.png")
 
 	px_img = np.zeros((3,256), dtype=np.int32)
@@ -213,7 +195,7 @@ def myHM():
 			for k in range(3):
 				out[i][j][k] = inv_ideal[k][int(cdf_img[k][img[i][j][k]])]
 
-	heImage = myHE(img_path)
+	heImage = myHE("../data/retina.png")
 	image_titles=["Original Image", "Histogram Matched Image", "Histogram Equalized Image "]
 	
 	ax = plt.subplot(1,3,1)
@@ -239,15 +221,8 @@ def myHM():
 	cax = divider.append_axes('right', size='5%', pad=0.05)
 	
 	plt.colorbar(im, cax= cax)
-
-	if(isinstance(path, str)):
-		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
-		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+os.path.split(path)[1])))
-	else:
-		SaVE_DIR = os.path.join(os.path.dirname(__file__), '..', 'images')
-		plt.savefig(os.path.join(SaVE_DIR, ('HistogramEqualizatioN'+'statue.png')))
-
 	plt.show()
+
 	return out
 
 
@@ -263,7 +238,7 @@ if __name__ == '__main__':
 		os.path.join(IMG_DIR, 'canyon.png'), 
 		os.path.join(IMG_DIR, 'church.png'), 
 		os.path.join(IMG_DIR, 'chestXray.png'), 
-		out
+		2*out
 	]
 	
 	for path in contrastPaths:
