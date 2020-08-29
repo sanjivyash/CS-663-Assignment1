@@ -55,7 +55,6 @@ def myBilinearInterpolation(path, hor, ver):
 
 			out[i][j] /= 255
 
-
 	plt.figure()
 	plt.imshow(img)
 
@@ -153,6 +152,6 @@ if __name__ == '__main__':
 	IMG_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 
 	myShrinkImageByFactorD(os.path.join(IMG_DIR, 'circles_concentric.png'), 2)
-	myBilinearInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
-	myNearestNeighborInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
-	myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 30)
+	# myBilinearInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
+	# myNearestNeighborInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
+	# myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 30)
