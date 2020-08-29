@@ -115,7 +115,7 @@ if __name__ == '__main__':
     print(path)
 
     start = time.time()
-    myCLAHE(path, 40, 0.02)
+    myCLAHE(path, 40, 0.02) # window size and threshold
     print(time.time() - start)
 
     plt.show()
