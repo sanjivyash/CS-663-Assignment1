@@ -150,9 +150,9 @@ def myHE(path):
 			B[b] += 1
 
 	sR, sG, sB = presums(R), presums(G), presums(B)
-	fR, fG, fB = [round(255*i/(m*n)) for i in sR], [round(255*i/(m*n)) for i in sG], [round(255*i/(m*n)) for i in sB]
+	fR, fG, fB = [i/(m*n) for i in sR], [i/(m*n) for i in sG], [i/(m*n) for i in sB]
 
-	out = np.zeros(img.shape, dtype=np.uint8)
+	out = np.zeros(img.shape, dtype=np.float64)
 
 	for i in range(m):
 		for j in range(n):
@@ -212,8 +212,8 @@ def myHM():
 		for j in range(n):
 			for k in range(3):
 				out[i][j][k] = inv_ideal[k][int(cdf_img[k][img[i][j][k]])]
-	heImage = myHE(img_path)
 
+	heImage = myHE(img_path)
 	image_titles=["Original Image", "Histogram Matched Image", "Histogram Equalized Image "]
 	
 	ax = plt.subplot(1,3,1)
