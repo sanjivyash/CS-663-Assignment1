@@ -95,11 +95,11 @@ def myAHE(path, N, threshold):
 
 
 if __name__ == '__main__':
-  path = os.path.join(os.path.dirname(__file__), '..', 'data' 'barbara.png')
+  path = os.path.join(os.path.dirname(__file__), '..', 'data', 'barbara.png')
   print(path)
 
   start = time.time()
-  myCLAHE(path, 30, 1)
+  myAHE(path, 30, 1)
   print(time.time() - start)
 
   plt.show()
