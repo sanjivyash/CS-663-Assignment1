@@ -176,8 +176,8 @@ def myHM():
 	mask_img = extractImage("../data/retinaMask.png")
 	mask_ideal = extractImage("../data/retinaRefMask.png")
 
-	img = raw_img * (mask_img//255)
-	ideal = raw_ideal * (mask_ideal//255) 
+	img = raw_img * (mask_img > 0)
+	ideal = raw_ideal * (mask_ideal > 0) 
 
 	px_img = np.zeros((3,256), dtype=np.int32)
 	px_ideal = 	np.zeros((3,256), dtype=np.int32)
