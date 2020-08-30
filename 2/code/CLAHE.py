@@ -109,6 +109,8 @@ def myCLAHE(path, N, threshold):
     cax = divider.append_axes('right', size='5%', pad=0.05)
     plt.colorbar(im, cax= cax)
 
+    return out
+
 
 if __name__ == '__main__':
     path = os.path.join(os.path.dirname(__file__), 'canyon', 'canyon.png')
