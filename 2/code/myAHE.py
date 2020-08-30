@@ -95,7 +95,7 @@ def myAHE(path, N, threshold):
 
 
 if __name__ == '__main__':
-    path = os.path.join(os.path.dirname(__file__), 'barbara.png')
+    path = os.path.join(os.path.dirname(__file__), '..', 'data' 'barbara.png')
     print(path)
 
     start = time.time()

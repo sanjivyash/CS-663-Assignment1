@@ -124,22 +124,114 @@ def myNearestNeighborInterpolation(path, hor, ver):
 	return out
 
 
-############################################################
-# INCOMPLETE
-def myBicubicInterpolation(path, ver, hor):
+def myBicubicInterpolation(path, hor, ver):
 	img = cv.imread(path)
 	img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
-	assert isinstance(img, np.ndarray)
-
 	m, n = img.shape[:2]
-	M, N = hor*m - (hor-1), ver*n - (ver-1)
-
-	out = np.zeros((M,N,3), dtype=np.uint8)
+	M, N = hor * m - (hor - 1), ver * n - (ver - 1)
+	out = np.zeros((M, N, 3), dtype=np.uint8)
 
 	for i in range(M):
 		for j in range(N):
-			pass
-#############################################################
+			row, col = int(i / hor), int(j / ver)
+			x, y = (i % hor) / hor, (j % ver) / ver
+
+			if 0 < row < m - 2 and 0 < col < n - 2:
+				f00, f01, f02, f03 = img[row - 1, col - 1], img[row - 1, col], img[row - 1, col + 1], img[row - 1, col + 2]
+				f10, f11, f12, f13 = img[row, col - 1], img[row, col], img[row, col + 1], img[row, col + 2]
+				f20, f21, f22, f23 = img[row + 1, col - 1], img[row + 1, col], img[row + 1, col + 1], img[row + 1, col + 2]
+				f30, f31, f32, f33 = img[row + 2, col - 1], img[row + 2, col], img[row + 2, col + 1], img[row + 2, col + 2]
+
+			elif row == 0 and col == 0:
+				f00, f01, f02, f03 = img[row, col], img[row, col], img[row, col + 1], img[row, col + 2]
+				f10, f11, f12, f13 = img[row, col], img[row, col], img[row, col + 1], img[row, col + 2]
+				f20, f21, f22, f23 = img[row + 1, col], img[row + 1, col], img[row + 1, col + 1], img[row + 1, col + 2]
+				f30, f31, f32, f33 = img[row + 2, col], img[row + 2, col], img[row + 2, col + 1], img[row + 2, col + 2]
+
+			elif row == 0 and col >= m - 2:
+				f00, f01, f02, f03 = img[row, col], img[row, col], img[row, col], img[row, col]
+				f10, f11, f12, f13 = img[row, col], img[row, col], img[row, col], img[row, col]
+				f20, f21, f22, f23 = img[row + 1, col], img[row + 1, col], img[row + 1, col], img[row + 1, col]
+				f30, f31, f32, f33 = img[row + 2, col], img[row + 2, col], img[row + 2, col], img[row + 2, col]
+
+			elif row >= n - 2 and col == 0:
+				f00, f01, f02, f03 = img[row - 1, col], img[row - 1, col], img[row - 1, col + 1], img[row - 1, col + 2]
+				f10, f11, f12, f13 = img[row, col], img[row, col], img[row, col + 1], img[row, col + 2]
+				f20, f21, f22, f23 = img[row, col], img[row, col], img[row, col + 1], img[row, col + 2]
+				f30, f31, f32, f33 = img[row, col], img[row, col], img[row, col + 1], img[row, col + 2]
+
+			elif row >= n - 2 and col >= m - 2:
+				f00, f01, f02, f03 = img[row - 1, col - 1], img[row - 1, col], img[row - 1, col], img[row - 1, col]
+				f10, f11, f12, f13 = img[row, col - 1], img[row, col], img[row, col], img[row, col]
+				f20, f21, f22, f23 = img[row, col - 1], img[row, col], img[row, col], img[row, col]
+				f30, f31, f32, f33 = img[row, col - 1], img[row, col], img[row, col], img[row, col]
+
+			elif row == 0:
+				f00, f01, f02, f03 = img[row, col - 1], img[row, col], img[row, col + 1], img[row, col + 2]
+				f10, f11, f12, f13 = img[row, col - 1], img[row, col], img[row, col + 1], img[row, col + 2]
+				f20, f21, f22, f23 = img[row + 1, col - 1], img[row + 1, col], img[row + 1, col + 1], img[row + 1, col + 2]
+				f30, f31, f32, f33 = img[row + 2, col - 1], img[row + 2, col], img[row + 2, col + 1], img[row + 2, col + 2]
+
+			elif row >= n - 2:
+				f00, f01, f02, f03 = img[row - 1, col - 1], img[row - 1, col], img[row - 1, col + 1], img[row - 1, col + 2]
+				f10, f11, f12, f13 = img[row, col - 1], img[row, col], img[row, col + 1], img[row, col + 2]
+				f20, f21, f22, f23 = img[row, col - 1], img[row, col], img[row, col + 1], img[row, col + 2]
+				f30, f31, f32, f33 = img[row, col - 1], img[row, col], img[row, col + 1], img[row, col + 2]
+
+			elif col == 0:
+				f00, f01, f02, f03 = img[row - 1, col], img[row - 1, col], img[row - 1, col + 1], img[row - 1, col + 2]
+				f10, f11, f12, f13 = img[row, col], img[row, col], img[row, col + 1], img[row, col + 2]
+				f20, f21, f22, f23 = img[row + 1, col], img[row + 1, col], img[row + 1, col + 1], img[row + 1, col + 2]
+				f30, f31, f32, f33 = img[row + 2, col], img[row + 2, col], img[row + 2, col+ 1], img[row + 2, col + 2]
+
+			elif col >= m - 2:
+				f00, f01, f02, f03 = img[row - 1, col - 1], img[row - 1, col], img[row - 1, col], img[row - 1, col]
+				f10, f11, f12, f13 = img[row, col - 1], img[row, col], img[row, col], img[row, col]
+				f20, f21, f22, f23 = img[row + 1, col - 1], img[row + 1, col], img[row + 1, col], img[row + 1, col]
+				f30, f31, f32, f33 = img[row + 2, col - 1], img[row + 2, col], img[row + 2, col], img[row + 2, col]
+			
+			Z = np.array([
+				f00, f01, f02, f03,
+			  f10, f11, f12, f13,
+			  f20, f21, f22, f23,
+			  f30, f31, f32, f33
+			]).reshape((4, 4, 3)).transpose()
+
+			X = np.tile(np.array([-1, 0, 1, 2]), (4, 1))
+			X[0, :] = X[0, :] ** 3
+			X[1, :] = X[1, :] ** 2
+			X[-1, :] = 1
+
+			Cr = Z @ np.linalg.inv(X)
+			R = np.rollaxis(Cr @ np.array([x * 3, x * 2, x, 1]), 0, 1).transpose()
+
+			Y = np.tile(np.array([-1, 0, 1, 2]), (4, 1)).transpose()
+			Y[:, 0] = Y[:, 0] ** 3
+			Y[:, 1] = Y[:, 1] ** 2
+			Y[:, -1] = 1
+
+			Cc = np.linalg.inv(Y) @ R
+
+			out[i][j] = (np.array([y * 3, y * 2, y, 1]) @ Cc)
+
+	titles=["Original Image", "bicubic Image"]
+
+	ax = plt.subplot(1,2,1)
+	im = ax.imshow(img)
+	ax.set_title(titles[0])
+
+	ax = plt.subplot(1,2,2)
+
+	im = ax.imshow(out)
+	ax.set_title(titles[1])
+
+	divider = make_axes_locatable(ax)
+	cax = divider.append_axes('right', size='5%', pad=0.05)
+
+	plt.colorbar(im, cax= cax)
+	plt.show()
+
+	return out
 
 
 def myImageRotation(path, deg):
@@ -198,8 +290,10 @@ if __name__ == '__main__':
 	IMG_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 
 	myShrinkImageByFactorD(os.path.join(IMG_DIR, 'circles_concentric.png'), 2)
+
 	myBilinearInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
 	myNearestNeighborInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
+	myBicubicInterpolation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 3, 2)
 	
 	myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 30)
 	myImageRotation(os.path.join(IMG_DIR, 'barbaraSmall.png'), 45)
