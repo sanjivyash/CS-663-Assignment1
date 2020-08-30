@@ -248,9 +248,9 @@ if __name__ == '__main__':
 	]
 	
 	for path in contrastPaths:
-    		myLinearContrastStretching(path)
+		myLinearContrastStretching(path)
 	
 	for path in contrastPaths:
-    		myHE(path)
+		myHE(path)
 	
 	myHM()
