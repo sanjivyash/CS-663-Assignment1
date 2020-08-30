@@ -170,8 +170,14 @@ def myHE(path):
 
 
 def myHM():
-	img = extractImage("../data/retina.png")
-	ideal = extractImage("../data/retinaRef.png")
+	raw_img = extractImage("../data/retina.png")
+	raw_ideal = extractImage("../data/retinaRef.png")
+
+	mask_img = extractImage("../data/retinaMask.png")
+	mask_ideal = extractImage("../data/retinaRefMask.png")
+
+	img = raw_img * (mask_img//255)
+	ideal = raw_ideal * (mask_ideal//255) 
 
 	px_img = np.zeros((3,256), dtype=np.int32)
 	px_ideal = 	np.zeros((3,256), dtype=np.int32)
@@ -195,7 +201,7 @@ def myHM():
 			for k in range(3):
 				out[i][j][k] = inv_ideal[k][int(cdf_img[k][img[i][j][k]])]
 
-	heImage = myHE("../data/retina.png")
+	heImage = myHE(img)
 	image_titles=["Original Image", "Histogram Matched Image", "Histogram Equalized Image "]
 	
 	ax = plt.subplot(1,3,1)
@@ -229,22 +235,22 @@ def myHM():
 if __name__ == '__main__':
 	IMG_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 	
-	path = os.path.join(IMG_DIR, 'statue.png')
-	out = myForegroundMask(path)
+	# path = os.path.join(IMG_DIR, 'statue.png')
+	# out = myForegroundMask(path)
 
-	contrastPaths=[
-		os.path.join(IMG_DIR, 'barbara.png'), 
-		os.path.join(IMG_DIR, 'TEM.png'),
-		os.path.join(IMG_DIR, 'canyon.png'), 
-		os.path.join(IMG_DIR, 'church.png'), 
-		os.path.join(IMG_DIR, 'chestXray.png'), 
-		2*out
-	]
+	# contrastPaths=[
+	# 	os.path.join(IMG_DIR, 'barbara.png'), 
+	# 	os.path.join(IMG_DIR, 'TEM.png'),
+	# 	os.path.join(IMG_DIR, 'canyon.png'), 
+	# 	os.path.join(IMG_DIR, 'church.png'), 
+	# 	os.path.join(IMG_DIR, 'chestXray.png'), 
+	# 	2*out
+	# ]
 	
-	for path in contrastPaths:
-    		myLinearContrastStretching(path)
+	# for path in contrastPaths:
+ #    		myLinearContrastStretching(path)
 	
-	for path in contrastPaths:
-    		myHE(path)
+	# for path in contrastPaths:
+ #    		myHE(path)
 	
 	myHM()

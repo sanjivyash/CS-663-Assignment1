@@ -52,7 +52,8 @@ def make_hist(tup):
     
     return (np.array([fR[r1], fG[g1], fB[b1]]), (i1,j1))
 
-def myCLAHE(path, N, threshold):
+
+def myAHE(path, N, threshold):
     if(isinstance(path, str)):
         img = extractImage(path)
     elif(isinstance(path, np.ndarray)):
@@ -78,6 +79,7 @@ def myCLAHE(path, N, threshold):
         out[i-(N//2)][j-(N//2)] = value
 
     image_titles=["Original Image", "Contrasted Image"]
+    
     ax = plt.subplot(1,2,1)
     im = ax.imshow(img)
     ax.set_title(image_titles[0])
@@ -87,6 +89,7 @@ def myCLAHE(path, N, threshold):
     im = ax.imshow(out)
     ax.set_title(image_titles[1])
     divider = make_axes_locatable(ax)
+    
     cax = divider.append_axes('right', size='5%', pad=0.05)
     plt.colorbar(im, cax= cax)
 
