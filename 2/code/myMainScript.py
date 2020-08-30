@@ -235,22 +235,22 @@ def myHM():
 if __name__ == '__main__':
 	IMG_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 	
-	# path = os.path.join(IMG_DIR, 'statue.png')
-	# out = myForegroundMask(path)
+	path = os.path.join(IMG_DIR, 'statue.png')
+	out = myForegroundMask(path)
 
-	# contrastPaths=[
-	# 	os.path.join(IMG_DIR, 'barbara.png'), 
-	# 	os.path.join(IMG_DIR, 'TEM.png'),
-	# 	os.path.join(IMG_DIR, 'canyon.png'), 
-	# 	os.path.join(IMG_DIR, 'church.png'), 
-	# 	os.path.join(IMG_DIR, 'chestXray.png'), 
-	# 	2*out
-	# ]
+	contrastPaths=[
+		os.path.join(IMG_DIR, 'barbara.png'), 
+		os.path.join(IMG_DIR, 'TEM.png'),
+		os.path.join(IMG_DIR, 'canyon.png'), 
+		os.path.join(IMG_DIR, 'church.png'), 
+		os.path.join(IMG_DIR, 'chestXray.png'), 
+		2*out
+	]
 	
-	# for path in contrastPaths:
- #    		myLinearContrastStretching(path)
+	for path in contrastPaths:
+    		myLinearContrastStretching(path)
 	
-	# for path in contrastPaths:
- #    		myHE(path)
+	for path in contrastPaths:
+    		myHE(path)
 	
 	myHM()
