@@ -45,6 +45,6 @@ from concurrent.futures import ThreadPoolExecutor as executor
 import matplotlib.pyplot as plt 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 ```
-Please insert these 8 lines at the top of those files instead of the original ones, and you may see that the ohnly change is a small one in line 6.
+Please insert these 8 lines at the top of those files instead of the original ones, and you may see that the only change is a small one in line 6.
 
-Linux Distros and Mac users should not have any problems.
+Linux Distros and Mac users should not have any problems with the original code.
