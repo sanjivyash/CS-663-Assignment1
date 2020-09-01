@@ -33,7 +33,7 @@ pip3 install -r requirements.txt
 ## Multiprocessing and Multithreading
 
 The two files ```2/code/myAHE.py``` and ```2/code/myCLAHE.py``` utilise the multiprocessing library of Python to improve the running time of these calculation intensive algorithms. 
-However this functionality is not provided in Windows machines, so they should change the multiprocessing to multithreading. That reduces the efficiency of the algorihtm but prevents the machine from freezing.
+However this functionality is not provided in Windows machines, so they should change the multiprocessing to multithreading. That reduces the efficiency of the algorithm but prevents the machine from freezing.
 
 ```python
 import os
