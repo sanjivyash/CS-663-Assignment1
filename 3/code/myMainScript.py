@@ -51,9 +51,9 @@ def myHE(path):
 
 def myNewHE(path):
   if(isinstance(path, str)):
-    img=extractImage(path)
+    img = extractImage(path)
   elif(isinstance(path, np.ndarray)):
-    img=path
+    img = path
   else:
     TypeError('Path or Image object not given')
   
@@ -73,8 +73,6 @@ def myNewHE(path):
     if(fR[i]>=0.5):
       median=i
       break
-  
-  print(median)
 
   R1 = R[:median+1]
   sR1 = np.array(presums(R1))
@@ -83,9 +81,6 @@ def myNewHE(path):
   R2 = R[median+1:]
   sR2 = np.array(presums(R2))
   fR2 = ((median)/255) + (sR2/sR2[-1])*((255-median)/255)
-  
-  print("FR1: ", fR1)
-  print('FR2 :', fR2)
 
   out = np.zeros(img.shape, dtype=np.float64)
   outHE = myHE(path)
@@ -125,5 +120,5 @@ def myNewHE(path):
 
 
 if __name__ == '__main__':
-  path = os.path.join(os.path.dirname(_file_), '..', 'data', 'camera.png')
+  path = os.path.join(os.path.dirname(__file__), '..', 'data', 'camera.jpeg')
   myNewHE(path)
