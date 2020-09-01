@@ -54,6 +54,6 @@ Linux Distros and Mac users should not have any problems with the original code.
 
 - In Problem 1, the code is present in ```1/code/myMainScript.py``` and the name of the functions follow the submission guidenelines. Since no one is sure of how slow Python is, all the output images have been carefully compiled and stored in ```1/images/``` directory.
 
-- For Problem 2, there are two more scripts, ```2/code/my AHE.py``` and ```2/code/myCLAHE.py``` apart from the usual ```2/code/myMainScript.py``` since they house codes which require multiprocessing. The CLAHE file has two functions ```myExactCLAHE``` and ```myBilinearCLAHE```, the second of which makes use of bilinear interpolation to approximate the CLAHE results. The ```2/images/``` directory also has two subdirectories to classify and separate the results provided by these two functions.
+- For Problem 2, there are two more scripts, ```2/code/myAHE.py``` and ```2/code/myCLAHE.py``` apart from the usual ```2/code/myMainScript.py``` since they house codes which require multiprocessing. The CLAHE file has two functions ```myExactCLAHE``` and ```myBilinearCLAHE```, the second of which makes use of bilinear interpolation to approximate the CLAHE results. The ```2/images/``` directory also has two subdirectories to classify and separate the results provided by these two functions.
 
-- For Problem 3, 
+- For Problem 3, the code has been included in ```3/code/myMainScript.py```. The image data is in ```3/data/``` while the results are in ```3/images/```.
