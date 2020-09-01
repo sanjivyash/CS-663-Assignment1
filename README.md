@@ -56,4 +56,6 @@ Linux Distros and Mac users should not have any problems with the original code.
 
 - For Problem 2, there are two more scripts, ```2/code/myAHE.py``` and ```2/code/myCLAHE.py``` apart from the usual ```2/code/myMainScript.py``` since they house codes which require multiprocessing. The CLAHE file has two functions ```myExactCLAHE``` and ```myBilinearCLAHE```, the second of which makes use of bilinear interpolation to approximate the CLAHE results. The ```2/images/``` directory also has two subdirectories to classify and separate the results provided by these two functions.
 
+- Images in ```2/images/CLAHE/``` are named ```${window_size}#{threshold_value}.png```, so an image called ```$20#0.02.png``` denotes a window size of 20 and threshold value of 0.02.  
+
 - For Problem 3, the code has been included in ```3/code/myMainScript.py```. The image data is in ```3/data/``` while the results are in ```3/images/```.

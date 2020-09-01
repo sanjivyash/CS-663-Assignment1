@@ -238,8 +238,8 @@ if __name__ == '__main__':
 
   start = time.time()
 
-  # myBilinearCLAHE(path, 20, 0.02) # window size and threshold
-  myExactCLAHE(path, 64, 0.02) # window size and threshold
+  myBilinearCLAHE(path, 20, 0.02) # window size and threshold
+  myExactCLAHE(path, 20, 0.02) # window size and threshold
   
   print(time.time() - start)
   plt.show()
