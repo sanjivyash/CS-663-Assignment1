@@ -46,5 +46,10 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 ```
 Please insert these 8 lines at the top of those files instead of the original ones, and you may see that the only change is a small one in line 6.
-
 Linux Distros and Mac users should not have any problems with the original code.
+
+## Structure and Setup
+
+- In Problem 1, the code is present in ```1/code/myMainScript.py``` and the name of the functions follow the submission guidenelines. Since no one is sure of how slow Python is, all the output images have been carefully compiled and stored in ```1/images/``` directory.
+
+- For Problem 2, there are two more scripts, ```2/code/my AHE.py``` and ```2/code/myCLAHE.py``` apart from the usual ```2/code/myMainScript.py``` since they house codes which require multiprocessing. The CLAHE file has two functions ```myExactCLAHE``` and ```myBilinearCLAHE```, the second of which makes use of bilinear interpolation to approximate the CLAHE results.   
